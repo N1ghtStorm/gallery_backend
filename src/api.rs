@@ -22,3 +22,8 @@ async fn get_all_images_names(web::Path(gallery_name): web::Path<String>) -> imp
     let serialized_names = serde_json::to_string(&images_names).unwrap();
     HttpResponse::Ok().body(serialized_names)
 }
+
+#[get("/api/galleries/{gallery_name}/{file_name}")]
+async fn get_image(web::Path((gallery_name, file_name)): web::Path<(String, String)>) -> impl Responder {
+    HttpResponse::Ok().body(format!("Gallery:{gallery_name}, FileName:{file_name}"))
+}
